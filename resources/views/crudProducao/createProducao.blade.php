@@ -16,7 +16,14 @@
             <div class="fs-4 m-2 mt-1 d-flex justify-content-between ">
                 <h2>Adicionar produção</h2>
             </div>
-
+            @if(session()->has('message'))
+            <div class="container">
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    {{ session()->get('message') }}
+                    <a href="{{route('producao')}}" class="btn btn-close"></a>
+                </div>
+            </div>
+            @endif
             <div class="container mt-5">
                 <div class="form-container bg-light p-4 rounded shadow-sm">
                     <form action="{{ route('producao.store') }}" method="get">
@@ -24,14 +31,20 @@
                         <div class="form-group mb-3">
                             <label for="date" class="form-label">Data de Produção</label>
                             <input type="date" id="date" name="date" class="form-control" required>
+                            @error('date')
+                            <small style="font-size: small;" class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="produzidos" class="form-label">Milheiros Produzidos</label>
                             <input type="number" id="produzidos" name="producao" class="form-control" required>
+                            @error('producao')
+                            <small style="font-size: small;" class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="d-flex flex-direction-row gap-3">
-                        <a class="btn btn-secondary" href="{{route('producao')}}">Voltar</a>
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                            <a class="btn btn-secondary" href="{{route('producao')}}">Voltar</a>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
                         </div>
                     </form>
                 </div>

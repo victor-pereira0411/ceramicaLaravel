@@ -23,15 +23,17 @@
             </div>
 
             <ul class="list-unstyled px-2">
-                <li class="btn1"><a href="/dashboard" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i>Painel</a></li>
-                <li class="btn2"><a href="/funcionarios" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-list"></i>
+                <li class="btn1"><a href="{{route('dashboard')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i>Painel</a></li>
+                <li class="btn2"><a href="{{route('funcionarios')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-list"></i>
                         Funcionários</a></li>
-                <li class="btn3"><a href="/producao" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
+                <li class="btn3"><a href="{{route('producao')}}" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
                         <span><i class="fal fa-comment"></i> Produção</span>
                     </a>
                 </li>
-                <li class="btn4"><a href="/folhapagamento" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
+                <li class="btn5"><a href="{{route('folhaPagamento.index')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
                         Folha de pagamento</a></li>
+                <li class="btn6"><a href="{{route('estoque')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
+                        Estoque</a></li>
             </ul>
             <hr class="h-color mx-2">
 
@@ -50,33 +52,18 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <hr class="m-0">
                             <li>
-                                <form action="{{route('logout')}}" method="post">
+                                <form action="{{route('logout')}}" method="post" onsubmit="confirmarSaida()">
                                     @csrf
                                     <button type="submit" class="dropdown-item">sair</button>
                                 </form>
                             </li>
                             @if(Auth::user()->id === 1)
                             <li>
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalgerenciar">
+                                <form action="" method="get">
+                                <button type="button" class="dropdown-item">
                                     Gerenciar usuários
                                 </button>
-                                <div class="modal fade" id="modalgerenciar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Understood</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                     </div>
                     </li>
                     @endif
@@ -104,6 +91,10 @@
                 }
                 window.addEventListener('load', removeClassOnSmallScreen);
                 window.addEventListener('resize', removeClassOnSmallScreen);
+
+                function confirmarSaida() {
+                    return confirm("Tem certeza de que quer sair da conta?");
+                }
             </script>
 </body>
 

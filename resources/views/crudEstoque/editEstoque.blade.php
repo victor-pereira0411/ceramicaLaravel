@@ -14,29 +14,33 @@
     <div class="dashboard-content px-3 pt-4">
         <div class="fs-4 m-2 mt-1 d-flex justify-content-between flex-column">
             <div class="fs-4 m-2 mt-1 d-flex justify-content-between ">
-                <h2>Editar produção</h2>
+                <h2>Editar estoque</h2>
             </div>
 
             <div class="container mt-5">
                 <div class="form-container bg-light p-4 rounded shadow-sm">
-                    <form action="{{ route('producao.update', ['id' => $producao->id]) }}" method="get">
+                    <form action="{{ route('estoque.update', ['id' => $estoque->id]) }}" method="get">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="date" class="form-label">Data de Produção</label>
-                            <input type="date" id="date" name="date" class="form-control" value="{{$producao->dataProducao}}" required>
-                            @error('date')
+                            <label for="tipo" class="form-label">Tipo de telha/tijolo</label>
+                            <input type="text" id="tipo" name="tipo" class="form-control" value="{{$estoque->name}}" disabled>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="milheiros" class="form-label">Milheiros disponíveis</label>
+                            <input type="number" id="milheiros" name="milheiros" class="form-control" value="{{$estoque->estoqueMilheiros}}" required>
+                            @error('milheiros')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="produzidos" class="form-label">Milheiros Produzidos</label>
-                            <input type="number" id="produzidos" name="producao" class="form-control" value="{{$producao->milheirosProduzidos}}" required>
-                            @error('producao')
+                            <label for="produzidos" class="form-label">Valor por milheiro</label>
+                            <input type="number" id="produzidos" name="valor" class="form-control" value="{{$estoque->valorMilheiro}}" required>
+                            @error('valor')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="d-flex flex-direction-row gap-3">
-                        <a class="btn btn-secondary" href="{{route('producao')}}">Voltar</a>
+                        <a class="btn btn-secondary" href="{{route('estoque')}}">Voltar</a>
                         <button type="submit" class="btn btn-primary">Atualizar dados</button>
                         </div>
                     </form>
@@ -49,7 +53,7 @@
 
     </div>
     <script>
-        const local = "producao";
+        const local = "estoque";
         $(".sidebar ul li").on("click", function() {
             $(".sidebar ul li.active").removeClass("active");
             $(this).addClass("active");
@@ -79,9 +83,9 @@
 
 
         function removeClassOnSmallScreen() {
-            const local = "producaos";
-            const element = document.querySelector('.btn3');
-            if (local === "producaos") {
+            const local = "estoque";
+            const element = document.querySelector('.btn6');
+            if (local === "estoque") {
                 element.classList.add('active');
             } else {
                 element.classList.remove('justify-content-end');

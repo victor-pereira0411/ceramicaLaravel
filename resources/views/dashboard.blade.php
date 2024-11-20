@@ -14,19 +14,14 @@
         <div class="row d-flex justify-content-center gap-4">
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
-                    <h5 class="card-title fs-4">Funcionários:</h5>
-                    <p class="fs-5">
-
-                    </p>
+                    <h5 class="card-title fs-4">Funcionários</h5>
                     <a href="/funcionarios" class="btn btn-primary">Veja mais</a>
                 </div>
             </div>
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <div class="d-flex flex-column">
-                        <h5 class="card-title fs-4">Produção:</h5>
-                        <p class="fs-5">
-                        </p>
+                        <h5 class="card-title fs-4">Produção</h5>
                     </div>
                     <div>
                         <a href="/producao" class="btn btn-primary">Veja mais</a>
@@ -36,9 +31,7 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <div>
-                        <h5 class="card-title fs-4">Folha de pagamento:</h5>
-                        <p class="fs-5">
-                        </p>
+                        <h5 class="card-title fs-4">Folha de pagamento</h5>
                     </div>
                     <div>
                         <a href="/folhapagamento" class="btn btn-primary">Veja mais</a>
@@ -58,10 +51,10 @@
                         <th scope="col">Milheiros Produzidos</th>
                     </thead>
                     <tbody>
-                        @foreach($producao as $producao)
+                        @foreach($producao as $p)
                         <tr scope="row">
-                            <td>{{$producao->data}}</td>
-                            <td>{{$producao->milheirosProduzidos}}</td>
+                            <td>{{ date( 'd/m/Y' , strtotime($p->dataProducao))}}</td>
+                            <td>{{$p->milheirosProduzidos}}</td>
                         </tr>
                         @endforeach
                     </tbody>

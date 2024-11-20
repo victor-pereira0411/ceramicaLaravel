@@ -5,8 +5,8 @@
         <div class="title-prod d-flex flex-direction-row justify-content-between w-100">
             <h2>Produção</h2>
             <div class="d-flex flex-direction-row gap-3">
-                <form action="modalProd/modalFinalizar.php" method="get">
-                    <button type="submit" class="btn btn-secondary" name="btnProd" value="ok">
+                <form action="{{ route('folhaPagamento.store') }}" method="get" onsubmit="return confirmarExclusaoProducao()">
+                    <button type="submit" class="btn btn-secondary">
                         Finalizar produção
                     </button>
                 </form>
@@ -25,6 +25,14 @@
             </div>
         </div>
     @endif
+    @if(session()->has('messageWarning'))
+        <div class="container">
+            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                {{ session()->get('messageWarning') }} 
+                <a href="{{route('producao')}}" class="btn btn-close"></a>
+            </div>
+        </div>
+    @endif
     @if(isset($producao))
     <div class="">
         <div class="table-responsive m-4 d-flex justify-content-center align-items-center">
@@ -38,7 +46,7 @@
 
                     @foreach ($producao as $p)
                     <tr scope='row'>
-                        <td> {{$p->dataProducao}} </td>
+                        <td> {{ date( 'd/m/Y' , strtotime($p->dataProducao))}} </td>
                         <td>  {{$p->milheirosProduzidos}} </td>
                         <td headers='4'>
                             <div class='botaos d-flex flex-row gap-1 justify-content-center'>
@@ -60,7 +68,7 @@
         </div>
     </div>
     @endif
-    @if(!isset($producao))
+    @if(empty($producao))
     <div class="d-flex justify-content-center mt-5">
         <h4>Você não possui produções cadastradas!</h4>
     </div>
@@ -112,6 +120,9 @@
 
     function confirmarExclusao() {
         return confirm("Tem certeza de que deseja deletar este item?");
+    }
+    function confirmarExclusaoProducao() {
+        return confirm("Tem certeza de que deseja finalizar essa produção e a enviar para a folha de pagamento?");
     }
 </script>
 @endsection

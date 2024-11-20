@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{asset('css/form  ')}}">
+    <link rel="stylesheet" href="{{asset('css/form')}}">
 </head>
 
 <body>
@@ -17,14 +17,30 @@
                 <h2>Adicionar funcionários</h2>
             </div>
 
-            <div class="form-container">
-                <form action="{{route('')}}" method="POST">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="nome">Ganho por milheiro</label>
-                    <input type="text" id="ganhoMilheiro" name="ganhoMilheiro" required>
-                    <button type="submit">Adicionar</button>
-                </form>
+            <div class="container mt-5">
+                <div class="form-container bg-light p-4 rounded shadow-sm">
+                    <form action="{{ route('funcionario.store') }}" method="get">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label for="name" class="form-label">Nome do funcionário</label>
+                            <input id="name" name="name" class="form-control" required>
+                            @error('name')
+                            <small style="font-size: small;" class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="ganho" class="form-label">Ganho por milheiro</label>
+                            <input type="number" id="ganho" name="ganhoMilheiro" class="form-control" max="200" required>
+                            @error('ganhoMilheiro')
+                            <small style="font-size: small;" class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="d-flex flex-direction-row gap-3">
+                            <a class="btn btn-secondary" href="{{route('funcionarios')}}">Voltar</a>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -44,6 +60,14 @@
 
         $(".close-btn").on("click", function() {
             $(".sidebar").removeClass("active");
+        });
+
+        const ganhoInput = document.getElementById('ganho');
+
+        ganhoInput.addEventListener('input', function() {
+            if (ganhoInput.value > 200) {
+                ganhoInput.value = 200; // Se o valor for maior que 200, define como 200
+            }
         });
 
         function removeClassOnSmallScreen() {

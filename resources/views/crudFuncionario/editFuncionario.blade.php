@@ -14,39 +14,36 @@
     <div class="dashboard-content px-3 pt-4">
         <div class="fs-4 m-2 mt-1 d-flex justify-content-between flex-column">
             <div class="fs-4 m-2 mt-1 d-flex justify-content-between ">
-                <h2>Editar produção</h2>
+                <h2>Editar Funcionário</h2>
             </div>
 
             <div class="container mt-5">
                 <div class="form-container bg-light p-4 rounded shadow-sm">
-                    <form action="{{ route('producao.update', ['id' => $producao->id]) }}" method="get">
+                    <form action="{{ route('funcionario.update', ['id' => $funcionario->idFuncionario]) }}" method="get">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="date" class="form-label">Data de Produção</label>
-                            <input type="date" id="date" name="date" class="form-control" value="{{$producao->dataProducao}}" required>
-                            @error('date')
+                            <label for="name" class="form-label">Nome do funcionário</label>
+                            <input  id="name" name="name" class="form-control" value="{{$funcionario->name}}" required>
+                            @error('name')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="produzidos" class="form-label">Milheiros Produzidos</label>
-                            <input type="number" id="produzidos" name="producao" class="form-control" value="{{$producao->milheirosProduzidos}}" required>
-                            @error('producao')
+                            <label for="ganho" class="form-label">Ganho por milheiro</label>
+                            <input type="number" id="ganho" name="ganhoMilheiro" class="form-control" value="{{$funcionario->ganhoMilheiro}}" required>
+                            @error('ganhoMilheiro')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="d-flex flex-direction-row gap-3">
-                        <a class="btn btn-secondary" href="{{route('producao')}}">Voltar</a>
+                        <a class="btn btn-secondary" href="{{route('funcionarios')}}">Voltar</a>
                         <button type="submit" class="btn btn-primary">Atualizar dados</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
-
     </div>
-
     </div>
     <script>
         const local = "producao";
@@ -79,9 +76,9 @@
 
 
         function removeClassOnSmallScreen() {
-            const local = "producaos";
-            const element = document.querySelector('.btn3');
-            if (local === "producaos") {
+            const local = "funcionario";
+            const element = document.querySelector('.btn2');
+            if (local === "funcionario") {
                 element.classList.add('active');
             } else {
                 element.classList.remove('justify-content-end');
