@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -50,25 +50,13 @@
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <hr class="m-0">
                             <li>
                                 <form action="{{route('logout')}}" method="post" onsubmit="confirmarSaida()">
                                     @csrf
                                     <button type="submit" class="dropdown-item">sair</button>
                                 </form>
                             </li>
-                            @if(Auth::user()->id === 1)
-                            <li>
-                                <form action="" method="get">
-                                <button type="button" class="dropdown-item">
-                                    Gerenciar usuários
-                                </button>
-                                </form>
                     </div>
-                    </li>
-                    @endif
-
-
             </nav>
 
             @yield('content')
