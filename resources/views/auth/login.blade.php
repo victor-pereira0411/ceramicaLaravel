@@ -28,15 +28,12 @@
 
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-
-                            <!-- Email Address -->
                             <div class="d-flex flex-column ">
                                 <x-input-label class="form-label" for="name" :value="__('Usuário')" />
                                 <x-text-input class="form-control mt-1 w-85" id="name" name="name" :value="old('name')" required autofocus autocomplete="username" />
                                 <x-input-error class="mt-2" :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
-                            <!-- Password -->
                             <div class="d-flex flex-column ">
                                 <x-input-label class="form-label" for="password" :value="__('Senha')" />
 

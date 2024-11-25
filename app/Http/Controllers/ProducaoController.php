@@ -36,12 +36,9 @@ class ProducaoController extends Controller
         return view('crudProducao/createProducao');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        // Validação dos campos
         $request->validate([
             'date' => 'required|date',
             'producao' => 'required|numeric|min:0',
@@ -63,14 +60,6 @@ class ProducaoController extends Controller
         return redirect()->route('crudProducao/createProducao')->with('message', 'Falha ao adicionar a produção, tente novamente!');
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $producao = Producao::select('dataProducao', 'milheirosProduzidos', 'id')->find($id);
@@ -78,13 +67,8 @@ class ProducaoController extends Controller
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        // Valida os dados do formulário
         $request->validate([
             'date' => 'required|date',
             'producao' => 'required|numeric|min:0',
@@ -95,14 +79,10 @@ class ProducaoController extends Controller
             'producao.min' => 'O valor de ganho por milheiro deve ser positivo.',
         ]);
 
-        // Encontra o registro pelo ID
         $producao = Producao::findOrFail($id);
 
-        // Atualiza os campos com os novos valores
         $producao->dataProducao = $request->input('date');
         $producao->milheirosProduzidos = $request->input('producao');
-
-        // Salva as alterações no banco de dados fdsfsgfsg
         $producao->save();
 
         if ($producao->wasChanged()) {
@@ -112,9 +92,6 @@ class ProducaoController extends Controller
         return redirect()->route('producao')->with('message', 'Erro ao atualizar a produção');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $this->Producaos->where('id', $id)->delete();

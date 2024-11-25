@@ -23,13 +23,8 @@ class EstoqueController extends Controller
     }
     
     
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        // Valida os dados do formulário
         $request->validate([
             'milheiros' => 'required|numeric|min:0',
             'valor' => 'required|numeric|min:0',
@@ -40,14 +35,11 @@ class EstoqueController extends Controller
             'valor.min' => 'O valor de ganho por milheiro deve ser positivo.',
         ]);
 
-        // Encontra o registro pelo ID
         $estoque = Estoque::findOrFail($id);
 
-        // Atualiza os campos com os novos valores
         $estoque->estoqueMilheiros = $request->input('milheiros');
         $estoque->valorMilheiro = $request->input('valor');
 
-        // Salva as alterações no banco de dados fdsfsgfsg
         $estoque->save();
 
         if ($estoque->wasChanged()) {

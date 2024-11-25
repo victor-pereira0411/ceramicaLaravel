@@ -25,19 +25,14 @@ class FolhaPagamentoController extends Controller
         return view('folhaPagamento', ['folha' => $folha]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
-        // Verifica se existem milheiros produzidos na tabela Producao
         $milheiros = Producao::sum('milheirosProduzidos');
         if ($milheiros == 0) {
             return redirect()->route('producao')->with('messageWarning', 'Não há produções cadastradas para se realizar pagamento!');
         }
 
-        // Verifica se existem funcionários cadastrados
         $funcionarios = Funcionario::select('idFuncionario', 'ganhoMilheiro')->get();
         if ($funcionarios->isEmpty()) {
             return redirect()->route('producao')->with('messageWarning', 'Não há funcionários cadastrados para realizar o pagamento!');

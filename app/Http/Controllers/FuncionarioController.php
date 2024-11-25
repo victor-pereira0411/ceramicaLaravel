@@ -31,12 +31,9 @@ class FuncionarioController extends Controller
         return view('crudFuncionario/createFuncionario');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        // Validação dos campos com regras e mensagens personalizadas
         $request->validate([
             'name' => 'required|min:4',
             'ganhoMilheiro' => 'required|numeric|min:0',
@@ -60,14 +57,6 @@ class FuncionarioController extends Controller
         return redirect()->route('crudFuncionario/createFuncionario')->with('message', 'Falha ao adicionar o funcionário, tente novamente!');
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $Funcionario = Funcionario::select('name', 'ganhoMilheiro', 'idFuncionario')->find($id);
@@ -75,13 +64,8 @@ class FuncionarioController extends Controller
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        // Valida os dados do formulário
         $request->validate([
             'name' => 'required|min:4',
             'ganhoMilheiro' => 'required|numeric|min:0',
@@ -93,14 +77,11 @@ class FuncionarioController extends Controller
             'ganhoMilheiro.min' => 'O valor de ganho por milheiro deve ser positivo.',
         ]);
 
-        // Encontra o registro pelo ID
         $Funcionario = Funcionario::findOrFail($id);
 
-        // Atualiza os campos com os novos valores
         $Funcionario->name = $request->input('name');
         $Funcionario->ganhoMilheiro = $request->input('ganhoMilheiro');
 
-        // Salva as alterações no banco de dados fdsfsgfsg
         $Funcionario->save();
 
         if ($Funcionario->wasChanged()) {
@@ -110,16 +91,11 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios')->with('message', 'Erro ao atualizar o funcionário!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        // Verifica se o funcionário está na tabela folhapagamento
         $funcionarioFolha = FolhaPagamento::where('funcionario_id', $id)->exists();
 
         if ($funcionarioFolha) {
-            // Se o funcionário estiver na tabela folhapagamento, retorna uma mensagem de erro
             return redirect()->route('funcionarios')->with('error', 'Não é possível excluir o funcionário enquanto houver pagamentos pendentes. Finalize o pagamento primeiro.');
         }
         $this->Funcionarios->where('idFuncionario', $id)->delete();

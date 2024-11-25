@@ -66,7 +66,7 @@
 
         ganhoInput.addEventListener('input', function() {
             if (ganhoInput.value > 200) {
-                ganhoInput.value = 200; // Se o valor for maior que 200, define como 200
+                ganhoInput.value = 200;
             }
         });
 
