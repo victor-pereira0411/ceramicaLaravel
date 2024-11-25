@@ -8,9 +8,7 @@ use App\Http\Controllers\FolhaPagamentoController;
 use App\Http\Controllers\FuncionarioController;
 use App\Models\Estoque;
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+Route::get('/', [ProducaoController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');;
 
 Route::get('/dashboard', [ProducaoController::class, 'dashboard']
 )->middleware(['auth', 'verified'])->name('dashboard');
