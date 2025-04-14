@@ -36,7 +36,6 @@
 
                             <div class="d-flex flex-column ">
                                 <x-input-label class="form-label" for="password" :value="__('Senha')" />
-
                                 <x-text-input class="form-control mt-1 w-85" id="password"
                                     type="password"
                                     name="password"

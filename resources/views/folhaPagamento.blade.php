@@ -38,7 +38,7 @@
                     @foreach ($folha as $fo)
                     <tr scope="row">
                         <td>{{ $fo->funcionario->name }}</td>
-                        <td>{{ $fo->valorMilheiro }} reais</td>
+                        <td>{{ money($fo->valorMilheiro, 'BRL',0) }} reais</td>
                         <td>{{ $fo->somaMilheiros }} milheiros</td>
                         <td>{{ $fo->salario }} reais</td>
                     </tr>
