@@ -6,6 +6,7 @@ use App\Http\Controllers\ProducaoController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\FolhaPagamentoController;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\ClienteController;
 use App\Models\Estoque;
 
 Route::get('/', [ProducaoController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');;
@@ -55,4 +56,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/clientes', [ClienteController::class, 'index'])->middleware(['auth', 'verified'])->name('cliente');
+
+Route::get('/clientes/create', [ClienteController::class, 'create'])->middleware(['auth', 'verified'])->name('cliente.create');
+
+Route::get('/clientes/store', [ClienteController::class, 'store'])->middleware(['auth', 'verified'])->name('cliente.store');
+
+Route::get('/clientes/delete/{id}', [ClienteController::class, 'destroy'])->middleware(['auth', 'verified'])->name('cliente.delete');
+
+Route::get('/clientes/editar/{id}', [ClienteController::class, 'edit'])->middleware(['auth', 'verified'])->name('cliente.edit');
+
+Route::get('/clientes/update/{id}', [ClienteController::class, 'update'])->middleware(['auth', 'verified'])->name('cliente.update');
 require __DIR__.'/auth.php';

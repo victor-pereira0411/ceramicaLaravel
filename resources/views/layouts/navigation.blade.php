@@ -33,7 +33,11 @@
                 <li class="btn5"><a href="{{route('folhaPagamento.index')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
                         Folha de pagamento</a></li>
                 <li class="btn6"><a href="{{route('estoque')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
-                        Estoque</a></li>
+                        Estoque</a>
+                </li>
+                <li class="btn7"><a href="" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
+                        Clientes</a>
+                </li>
             </ul>
             <hr class="h-color mx-2">
 
