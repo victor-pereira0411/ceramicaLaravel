@@ -62,13 +62,6 @@
             $(".sidebar").removeClass("active");
         });
 
-        const ganhoInput = document.getElementById('ganho');
-
-        ganhoInput.addEventListener('input', function() {
-            if (ganhoInput.value > 200) {
-                ganhoInput.value = 200;
-            }
-        });
 
         function removeClassOnSmallScreen() {
             const screenWidth = window.innerWidth;
