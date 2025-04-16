@@ -3,8 +3,8 @@
 <div class="dashboard-content px-3 pt-4">
     <div class="fs-4 m-2 mt-1 d-flex justify-content-between flex-column">
         <div class="fs-4 m-2 mt-1 d-flex justify-content-between ">
-            <h2>Funcionários</h2>
-            <form action="{{route('funcionario.create')}}" method="get">
+            <h2>Clientes</h2>
+            <form action="{{route('cliente.create')}}" method="get">
                 <input class="btn btn-primary" type="submit" value="adicionar">
             </form>
         </div>
@@ -17,7 +17,7 @@
         <div class="container">
             <div class='alert alert-success alert-dismissible fade show' role='alert'>
                 {{ session()->get('message') }} 
-                <a href="{{route('funcionarios')}}" class="btn btn-close"></a>
+                <a href="{{route('cliente')}}" class="btn btn-close"></a>
             </div>
         </div>
     @endif
@@ -25,30 +25,30 @@
         <div class="container">
             <div class='alert alert-danger alert-dismissible fade show' role='alert'>
                 {{ session()->get('error') }} 
-                <a href="{{route('funcionarios')}}" class="btn btn-close"></a>
+                <a href="{{route('cliente')}}" class="btn btn-close"></a>
             </div>
         </div>
     @endif
-    @if(isset($funcionario))
+    @if(isset($cliente))
     <div class="">
         <div class="table-responsive m-4 d-flex justify-content-center align-items-center">
             <table class="table table-hover table-sm text-center">
                 <thead>
                     <th scope="col">nome</th>
-                    <th scope="col">Ganho(milheiro)</th>
+                    <th scope="col">tipo da telha</th>
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody>
-                    @foreach($funcionario as $f)
+                    @foreach($cliente as $c)
                     <tr scope='row'>
-                        <td> {{$f->name}} </td>
-                        <td> {{$f->ganhoMilheiro}} </td>
+                        <td> {{$c->nome}} </td>
+                        <td> {{$c->tipoTelha}} </td>
                         <td headers='4'>
                             <div class='botaos d-flex flex-row gap-1 justify-content-center'>
-                                <form action="{{route('funcionario.edit', ['id' => $f->idFuncionario])}}" method='get'>
+                                <form action="{{route('cliente.edit', ['id' => $c->id])}}" method='get'>
                                     <input type='submit' class='btn btn-warning' value='editar'>
                                 </form>
-                                <form action="{{route('funcionario.delete', ['id' => $f->idFuncionario])}}" method='get' onsubmit="return confirmarExclusao()">
+                                <form action="{{route('cliente.delete', ['id' => $c->id])}}" method='get' onsubmit="return confirmarExclusao()">
                                     @csrf
                                     <input type='submit' class='btn btn-danger' value='excluir'>
                                 </form>
@@ -61,16 +61,16 @@
         </div>
     </div>
     @endif
-    @if(!isset($funcionario))
+    @if(!isset($cliente))
     <div class="d-flex justify-content-center mt-5">
-        <h4>Você não possui funcionários cadastrados!</h4>
+        <h4>Você não possui clientes cadastrados!</h4>
     </div>
     @endif
 </div>
 
 </div>
 <script>
-    const local = "funcionarios";
+    const local = "cliente";
     $(".sidebar ul li").on("click", function() {
         $(".sidebar ul li.active").removeClass("active");
         $(this).addClass("active");

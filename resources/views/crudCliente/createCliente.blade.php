@@ -22,21 +22,26 @@
                     <form action="{{ route('cliente.store') }}" method="get">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="name" class="form-label">Nome do funcionário</label>
-                            <input id="name" name="name" class="form-control" required>
-                            @error('name')
+                            <label for="nome" class="form-label">Nome do cliente</label>
+                            <input id="nome" name="nome" class="form-control" required>
+                            @error('nome')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="ganho" class="form-label">Ganho por milheiro</label>
-                            <input type="number" id="ganho" name="ganhoMilheiro" class="form-control" max="200" required>
-                            @error('ganhoMilheiro')
+                            <label for="ganho" class="form-label">tipo da telha</label>
+                            <select id="tipoTelha" name="tipoTelha" class="form-control" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="vermelha">Vermelha</option>
+                                <option value="amarela">Amarela</option>
+                                <option value="intermediaria">Intermediária</option>
+                            </select>
+                            @error('tipoTelha')
                             <small style="font-size: small;" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="d-flex flex-direction-row gap-3">
-                            <a class="btn btn-secondary" href="{{route('funcionarios')}}">Voltar</a>
+                            <a class="btn btn-secondary" href="{{route('cliente')}}">Voltar</a>
                             <button type="submit" class="btn btn-primary">Adicionar</button>
                         </div>
                     </form>

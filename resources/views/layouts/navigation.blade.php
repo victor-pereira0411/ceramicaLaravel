@@ -35,7 +35,7 @@
                 <li class="btn6"><a href="{{route('estoque')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
                         Estoque</a>
                 </li>
-                <li class="btn7"><a href="" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
+                <li class="btn7"><a href="{{route('cliente')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i>
                         Clientes</a>
                 </li>
             </ul>

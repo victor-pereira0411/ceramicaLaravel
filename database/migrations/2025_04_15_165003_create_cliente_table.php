@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("nome");
-            $table->integer("cpf");
-            $table->integer("telefone");
-            $table->string("endereco");
             $table->string("tipoTelha");
         });
     }

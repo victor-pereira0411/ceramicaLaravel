@@ -26,79 +26,59 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('crudFuncionario/createFuncionario');
+        return view('crudCliente/createCliente');
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:4',
-            'ganhoMilheiro' => 'required|numeric|min:0',
-        ], [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.min' => 'O nome deve ter pelo menos 4 caracteres.',
-            'ganhoMilheiro.required' => 'O campo ganho por milheiro é obrigatório.',
-            'ganhoMilheiro.numeric' => 'O campo ganho por milheiro deve ser numérico.',
-            'ganhoMilheiro.min' => 'O valor de ganho por milheiro deve ser positivo.',
+            'nome' => 'required|min:4',
         ]);
 
-        $created = $this->Funcionarios->create([
-            'name' => $request->input('name'),
-            'ganhoMilheiro' => $request->input('ganhoMilheiro'),
+        $created = $this->cliente->create([
+            'nome' => $request->input('nome'),
+            'tipoTelha' => $request->input('tipoTelha')
         ]);
 
         if ($created) {
-            return redirect()->route('funcionarios')->with('message', 'O funcionário "' . $created->name  . '" foi adicionado com sucesso!');
+            return redirect()->route('cliente')->with('message', 'O cliente "' . $created->nome  . '" foi adicionado com sucesso!');
         }
 
-        return redirect()->route('crudFuncionario/createFuncionario')->with('message', 'Falha ao adicionar o funcionário, tente novamente!');
+        return redirect()->route('crudCliente/createCliente')->with('message', 'Falha ao adicionar o cliente, tente novamente!');
     }
 
     public function edit($id)
     {
-        $Funcionario = Funcionario::select('name', 'ganhoMilheiro', 'idFuncionario')->find($id);
-        return view('crudFuncionario/editFuncionario', ['funcionario' => $Funcionario]);
+        $cliente = Cliente::select('id','nome', 'tipoTelha')->find($id);
+        return view('crudCliente/editCliente', ['cliente' => $cliente]);
     }
 
 
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|min:4',
-            'ganhoMilheiro' => 'required|numeric|min:0',
-        ], [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.min' => 'O nome deve ter pelo menos 4 caracteres.',
-            'ganhoMilheiro.required' => 'O campo ganho por milheiro é obrigatório.',
-            'ganhoMilheiro.numeric' => 'O campo ganho por milheiro deve ser numérico.',
-            'ganhoMilheiro.min' => 'O valor de ganho por milheiro deve ser positivo.',
+            'nome' => 'required|min:4',
         ]);
 
-        $Funcionario = Funcionario::findOrFail($id);
+        $cliente = Cliente::findOrFail($id);
 
-        $Funcionario->name = $request->input('name');
-        $Funcionario->ganhoMilheiro = $request->input('ganhoMilheiro');
+        $cliente->nome = $request->input('nome');
+        $cliente->tipoTelha = $request->input('tipoTelha');
+        $cliente->save();
 
-        $Funcionario->save();
-
-        if ($Funcionario->wasChanged()) {
-            return redirect()->route('funcionarios')->with('message', 'Funcionário ' . $Funcionario->name . ' atualizado com sucesso');
+        if ($cliente->wasChanged()) {
+            return redirect()->route('cliente')->with('message', 'Cliente ' . $cliente->name . ' atualizado com sucesso');
         }
 
-        return redirect()->route('funcionarios')->with('message', 'Erro ao atualizar o funcionário!');
+        return redirect()->route('cliente')->with('message', 'Erro ao atualizar o cliente!');
     }
 
     public function destroy(string $id)
     {
-        $funcionarioFolha = FolhaPagamento::where('funcionario_id', $id)->exists();
+        $this->cliente->where('id', $id)->delete();
 
-        if ($funcionarioFolha) {
-            return redirect()->route('funcionarios')->with('error', 'Não é possível excluir o funcionário enquanto houver pagamentos pendentes. Finalize o pagamento primeiro.');
-        }
-        $this->Funcionarios->where('idFuncionario', $id)->delete();
-
-        return redirect()->route('funcionarios')->with('message', 'Funcionário deletado com sucesso!');
+        return redirect()->route('cliente')->with('message', 'Cliente deletado com sucesso!');
     }
 }
  
